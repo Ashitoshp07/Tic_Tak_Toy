@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TIC TAC TOE</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+	<style type="text/css">
+		.box{
+			float: left;
+			height: 140px;
+			width: 140px;
+			box-sizing: border-box;
+			border: 5px solid white;
+		}
+	</style>
+</head>
+<body>
+<div style="width:420px;height:420px;background:orange;margin-left: 35%;margin-top: 10%;">
+	<div class="box" onclick="addSelection(0,this)"></div>	
+	<div class="box" onclick="addSelection(1,this)"></div>	
+	<div class="box" onclick="addSelection(2,this)"></div>	
+	<div class="box" onclick="addSelection(3,this)"></div>	
+	<div class="box" onclick="addSelection(4,this)"></div>	
+	<div class="box" onclick="addSelection(5,this)"></div>	
+	<div class="box" onclick="addSelection(6,this)"></div>	
+	<div class="box" onclick="addSelection(7,this)"></div>	
+	<div class="box" onclick="addSelection(8,this)"></div>	
+</div>
+
+<script type="text/javascript">
+	var user=0;
+	var userSelect=['','','','','','','','',''];
+	var clickable=true;
+
+	function addSelection(index,elmt){
+
+    if(elmt.innerHTML=='' && clickable){
+
+		if (user%2==0) {
+			// console.log("user 1");
+			elmt.innerHTML=`<img src="Circle.png" width="95%" height="95%">`;
+			userSelect[index]="user1";
+          checkwinner('user1');
+		}
+		else{	
+			// console.log("user 2");
+			elmt.innerHTML=`<img src="Cross.png" width="95%" height="95%">`;
+			userSelect[index]="user2";
+          checkwinner('user2');
+		}
+		user++;
+		if (user==9 && clickable) {
+			clickable=true;
+			alert("Game is Draw")
+		}
+        }
+		console.log(userSelect)
+	}
+	function checkwinner(username){
+		if (userSelect[0]==username && userSelect[1]==username && userSelect[2]==username ||userSelect[3]==username && userSelect[4]==username && userSelect[5]==username ||userSelect[6]==username && userSelect[7]==username && userSelect[8]==username ||userSelect[0]==username && userSelect[4]==username && userSelect[8]==username ||userSelect[2]==username && userSelect[4]==username && userSelect[6]==username ||userSelect[0]==username && userSelect[3]==username && userSelect[6]==username ||userSelect[1]==username && userSelect[4]==username && userSelect[7]==username ||userSelect[2]==username && userSelect[5]==username && userSelect[8]==username) {
+			// alert(username+" is Winner");
+			$(document).on('click', '.box', function(e) {
+      swal(
+        `<b>${username}</b>' Congrats!'`,
+        'You Are <b style="color:green;">Winner</b>!',
+        'success'
+      )
+    });
+			clickable=false;
+		}
+	}
+</script>
+</body>
+</html>
